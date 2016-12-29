@@ -4,18 +4,20 @@
 # Also change "/home/adam/tt/aard" to whatever directory you use for the settings.
 # Requires Tmux 1.5 - See http://theixle.dyndns.org for a download link.
 
-DIR="/home/adam/tt/aard"
+DIR="/home/Sobol/aardwolf-tintin"
 
 tmux kill-session -t aardwolf
-tmux new-session -d -s aardwolf -x 189 -y 47
-tmux splitw -h -l 159 "tail -fs .1 $DIR/Aardwolf-chats"
-tmux splitw -v -l 37 "tt++ -G $DIR/setup.tin;bash -i"
-tmux splitw -h -l 68 "tail -fs .1 $DIR/chars"
-tmux selectp -t 0
-tmux splitw -v -l 22 "tail -fs .1 $DIR/minimap"
-tmux selectp -t 0
-tmux splitw -v -l 14 "tail -fs .1 $DIR/group"
-tmux selectp -t 5
+tmux new -d -s aardwolf
+tmux neww "tail -fs .1 $DIR/Aardwolf-chats"
+tmux splitw -b -h -l 30 "tail -fs .1 $DIR/minimap"
+tmux selectp -t 1
+tmux splitw -v -b -l 34 "tail -fs .1 $DIR/group"
 tmux splitw -v -l 20 "tail -fs .1 $DIR/quest"
-tmux selectp -t 4
+tmux selectp -t 0
+tmux splitw -v -l 44 "tt++ -G $DIR/setup.tin;bash -i"
+tmux splitw -h -l 40 "tail -fs .1 $DIR/chars"
+tmux selectp -t 1
+#tmux selectp -t 0
+#tmux selectp -t 5
+#tmux selectp -t 4
 tmux attach-session -t aardwolf

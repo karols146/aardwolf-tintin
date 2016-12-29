@@ -1,0 +1,86 @@
+#nop This script is written for v1.99.7 and higher
+
+#class worlddata read worlddata.tin
+
+#if {&{worldlist} == 0}
+{
+	#class worlddata open;
+	#list worldlist clr;
+	#class worlddata close
+}
+
+#alias {addwoad}
+{
+	#if {"%3" == ""}
+	{
+		#showme Syntax: addworld <name> <host> <port> [character name] [password]
+	};
+	#else
+	{
+		#var worldlist[%1][name] %1;
+		#var worldlist[%1][host] %2;
+		#var worldlist[%1][port] %3;
+		#if {"%4" != ""}
+		{
+			#var worldlist[%1][char] %4
+		};
+		#if {"%5" != ""}
+		{
+			#var worldlist[%1][pass] %5
+		};
+		#if {&worldlist[%1][char]}
+		{
+			#showme The world %1 (%2 %3) and the character %4 (%5) has been added.
+		};
+		#else
+		{
+			#showme The world %1 (%2 %3) has been added.
+		};
+		#class worlddata write worlddata.tin
+	}
+}
+
+#alias {delwo}
+{
+	#if {&worldlist[%1] != 0}
+	{
+		#unvar worldlist[%1];
+		#class worlddata write worlddata.tin;
+		#showme The world %1 has been deleted.
+	};
+	#else
+	{
+		#showme The world %1 couldn't be found.
+	}
+}
+
+#alias {connect}
+{
+	#if {"%1" == ""}
+	{
+		#echo {%h} {{ WORLD LIST }};
+
+		#foreach {$worldlist[]} {world}
+		{
+			#echo {%-20s %s %s %s} {$worldlist[$world][name]} {$worldlist[$world][host]} {$worldlist[$world][port]} {$worldlist[$world][char]}
+		}
+	};
+	#elseif {&worldlist[%1] != 0}
+	{
+		#ses $worldlist[%1][name] $worldlist[%1][host] $worldlist[%1][port];
+
+		#if {$worldlist[%1][char]}
+		{
+			#$worldlist[%1][name] $worldlist[%1][char];
+
+			#if {$worldlist[%1][pass]}
+			{
+				#$worldlist[%1][name] $worldlist[%1][pass]
+			}
+		}
+	};
+	#else
+	{
+		#showme Couldn't find world %1.
+	}
+}
