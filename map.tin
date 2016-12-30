@@ -1,6 +1,7 @@
 #CLASS {map} KILL
 #CLASS {map} OPEN
 
+
 #ACTION {^<MAPEND>$}
 {
 	#line gag;
@@ -37,8 +38,16 @@
 #ACTION {^<MAPSTART>$}
 {
 	#variable getmap 1;
+  #sys {echo "" >> $dir/minimap};
+  #line gag;
+  
+    #if {$Num == 5 }
+    {
     #sys {echo "" > $dir/minimap};
-	#line gag
+    #var Num 1;
+    }
+    
+  #math Num {$Num + 1}
 }
 {1}
 
