@@ -153,6 +153,8 @@
 
 #EVENT {IAC SB GMCP comm.repop IAC SE}
 {
+  #if {$repoptrackToggle}
+  {
 	#var {GMCP[COMM][REPOP]} {%0};
 	#format {curr_time} {%T};
 	#if {$repoptrack}
@@ -166,11 +168,14 @@
 	$repchan @WRepop @w= @r$GMCP[COMM][REPOP][zone]@w @@ @r$time;
 	#var time {};
 	#nop;
+  }
 }
 
 #alias {^repopwatch {on|off}$}
 {
-	#if {"%1" == on"}
+#nop adding " on on
+
+	#if {"%1" == "on"} 
 	{
 		#var repoptrack 1;
 	}

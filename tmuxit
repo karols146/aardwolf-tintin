@@ -11,11 +11,11 @@ tmux new -d -s aardwolf
 tmux neww "tail -fs .1 $DIR/Aardwolf-chats"
 tmux splitw -b -h -l 30 "tail -fs .1 $DIR/minimap"
 tmux selectp -t 1
-tmux splitw -v -b -l 34 "tail -fs .1 $DIR/group"
+tmux splitw -v -b -l 43 "tail -fs .1 $DIR/group"
 tmux splitw -v -l 20 "tail -fs .1 $DIR/quest"
 tmux selectp -t 0
-tmux splitw -v -l 44 "tt++ -G $DIR/setup.tin;bash -i"
-tmux splitw -h -l 40 "tail -fs .1 $DIR/chars"
+tmux splitw -v -l 41 "tt++ -G $DIR/setup.tin;bash -i"
+tmux splitw -h -l 46 "tail -fs .1 $DIR/chars"
 tmux selectp -t 1
 #tmux selectp -t 0
 #tmux selectp -t 5
